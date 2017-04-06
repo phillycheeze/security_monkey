@@ -6,21 +6,21 @@ We need to create two roles for security monkey. The first role will be an insta
 Creating SecurityMonkeyInstanceProfile Role
 -------------------------------------------
 
-Create a new role and name it “SecurityMonkeyInstanceProfile”:
+Create a new role and name it "SecurityMonkeyInstanceProfile":
 
-![image]
+![image](images/resized_name_securitymonkeyinstanceprofile_role.png)
 
-Select “Amazon EC2” under “AWS Service Roles”.
+Select "Amazon EC2" under "AWS Service Roles".
 
-![image][1]
+![image](images/resized_create_role.png)
 
-Select “Custom Policy”:
+Select "Custom Policy":
 
-![image][2]
+![image](images/resized_role_policy.png)
 
-Paste in this JSON with the name “SecurityMonkeyLaunchPerms”:
+Paste in this JSON with the name "SecurityMonkeyLaunchPerms":
 
-``` sourceCode
+~~~~ {.sourceCode .json}
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -38,30 +38,30 @@ Paste in this JSON with the name “SecurityMonkeyLaunchPerms”:
     }
   ]
 }
-```
+~~~~
 
 Review and create your new role:
 
-![image][3]
+![image](images/resized_role_confirmation.png)
 
 Creating SecurityMonkey Role
 ----------------------------
 
-Create a new role and name it “SecurityMonkey”:
+Create a new role and name it "SecurityMonkey":
 
-![image][4]
+![image](images/resized_name_securitymonkey_role.png)
 
-Select “Amazon EC2” under “AWS Service Roles”.
+Select "Amazon EC2" under "AWS Service Roles".
 
-![image][1]
+![image](images/resized_create_role.png)
 
-Select “Custom Policy”:
+Select "Custom Policy":
 
-![image][2]
+![image](images/resized_role_policy.png)
 
-Paste in this JSON with the name “SecurityMonkeyReadOnly”:
+Paste in this JSON with the name "SecurityMonkeyReadOnly":
 
-``` sourceCode
+~~~~ {.sourceCode .json}
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -94,10 +94,132 @@ Paste in this JSON with the name “SecurityMonkeyReadOnly”:
                 "ec2:describevpcendpoints",
                 "ec2:describevpcpeeringconnections",
                 "ec2:describevpcs",
-```
+                "ec2:describevpngateways",
+                "elasticloadbalancing:describeloadbalancerattributes",
+                "elasticloadbalancing:describeloadbalancerpolicies",
+                "elasticloadbalancing:describeloadbalancers",
+                "es:describeelasticsearchdomainconfig",
+                "es:listdomainnames",
+                "iam:getaccesskeylastused",
+                "iam:getgroup",
+                "iam:getgrouppolicy",
+                "iam:getloginprofile",
+                "iam:getpolicyversion",
+                "iam:getrole",
+                "iam:getrolepolicy",
+                "iam:getservercertificate",
+                "iam:getuser",
+                "iam:getuserpolicy",
+                "iam:listaccesskeys",
+                "iam:listattachedgrouppolicies",
+                "iam:listattachedrolepolicies",
+                "iam:listattacheduserpolicies",
+                "iam:listentitiesforpolicy",
+                "iam:listgrouppolicies",
+                "iam:listgroups",
+                "iam:listinstanceprofilesforrole",
+                "iam:listmfadevices",
+                "iam:listpolicies",
+                "iam:listrolepolicies",
+                "iam:listroles",
+                "iam:listservercertificates",
+                "iam:listsigningcertificates",
+                "iam:listuserpolicies",
+                "iam:listusers",
+                "kms:describekey",
+                "kms:getkeypolicy",
+                "kms:listaliases",
+                "kms:listgrants",
+                "kms:listkeypolicies",
+                "kms:listkeys",
+                "lambda:listfunctions",
+                "rds:describedbclusters",
+                "rds:describedbclustersnapshots",
+                "rds:describedbinstances",
+                "rds:describedbsecuritygroups",
+                "rds:describedbsnapshots",
+                "rds:describedbsubnetgroups",
+                "redshift:describeclusters",
+                "route53:listhostedzones",
+                "route53:listresourcerecordsets",
+                "route53domains:listdomains",
+                "route53domains:getdomaindetail",
+                "s3:getaccelerateconfiguration",
+                "s3:getbucketacl",
+                "s3:getbucketcors",
+                "s3:getbucketlocation",
+                "s3:getbucketlogging",
+                "s3:getbucketnotification",
+                "s3:getbucketpolicy",
+                "s3:getbuckettagging",
+                "s3:getbucketversioning",
+                "s3:getbucketwebsite",
+                "s3:getlifecycleconfiguration",
+                "s3:listbucket",
+                "s3:listallmybuckets",
+                "s3:getreplicationconfiguration",
+                "s3:getanalyticsconfiguration",
+                "s3:getmetricsconfiguration",
+                "s3:getinventoryconfiguration",
+                "ses:getidentityverificationattributes",
+                "ses:listidentities",
+                "ses:listverifiedemailaddresses",
+                "ses:sendemail",
+                "sns:gettopicattributes",
+                "sns:listsubscriptionsbytopic",
+                "sns:listtopics",
+                "sqs:getqueueattributes",
+                "sqs:listqueues"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ]
+}
+~~~~
 
-  [image]: images/resized_name_securitymonkeyinstanceprofile_role.png
-  [1]: images/resized_create_role.png
-  [2]: images/resized_role_policy.png
-  [3]: images/resized_role_confirmation.png
-  [4]: images/resized_name_securitymonkey_role.png
+Review and create the new role.
+
+Allow SecurityMonkeyInstanceProfile to AssumeRole to SecurityMonkey
+-------------------------------------------------------------------
+
+You should now have two roles available in your AWS Console:
+
+![image](images/resized_both_roles.png)
+
+Select the "SecurityMonkey" role and open the "Trust Relationships" tab.
+
+![image](images/resized_edit_trust_relationship.png)
+
+Edit the Trust Relationship and paste this in:
+
+~~~~ {.sourceCode .json}
+{
+  "Version": "2008-10-17",
+  "Statement": [
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::<YOUR ACCOUNTID GOES HERE>:role/SecurityMonkeyInstanceProfile"
+        ]
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+~~~~
+
+Adding more accounts
+--------------------
+
+To have your instance of security monkey monitor additional accounts, you must add a SecurityMonkey role in the new account. Follow the instructions above to create the new SecurityMonkey role. The Trust Relationship policy should have the account ID of the account where the security monkey instance is running.
+
+**Note**
+
+Additional SecurityMonkeyInstanceProfile roles are not required. You only need to create a new SecurityMonkey role.
+
+**Note**
+
+You will also need to add the new account in the Web UI, and restart the scheduler. More information on how do to this will be presented later in this guide.

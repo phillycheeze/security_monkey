@@ -1,13 +1,9 @@
-
-=================
 Using supervisor
-=================
+================
 
-Supervisor is a very nice way to manage you Python processes. We won't cover
-the setup (which is just apt-get install supervisor or pip install supervisor
-most of the time), but here is a quick overview on how to use it.
+Supervisor is a very nice way to manage you Python processes. We won't cover the setup (which is just apt-get install supervisor or pip install supervisor most of the time), but here is a quick overview on how to use it.
 
-Create a configuration file named security_monkey.conf under /etc/supervisor/conf.d/::
+Create a configuration file named security\_monkey.conf under /etc/supervisor/conf.d/:
 
     # Control Startup/Shutdown:
     # sudo supervisorctl
@@ -27,29 +23,25 @@ Create a configuration file named security_monkey.conf under /etc/supervisor/con
     environment=PYTHONPATH='/usr/local/src/security_monkey/',SECURITY_MONKEY_SETTINGS="/usr/local/src/secmonkey-config/env-config/config-local.py"
     command=python /usr/local/src/security_monkey/manage.py start_scheduler
 
-
-The 4 first entries are just boiler plate to get you started, you can copy
-them verbatim.
+The 4 first entries are just boiler plate to get you started, you can copy them verbatim.
 
 The last one define one (you can have many) process supervisor should manage.
 
-It means it will run the command::
+It means it will run the command:
 
     python manage.py run_api_server
-
 
 In the directory, with the environment and the user you defined.
 
 This command will be ran as a daemon, in the background.
 
-`autostart` and `autorestart` just make it fire and forget: the site will always be
-running, even it crashes temporarily or if you restart the machine.
+autostart and autorestart just make it fire and forget: the site will always be running, even it crashes temporarily or if you restart the machine.
 
-Normally run supervisor::
+Normally run supervisor:
 
     sudo service supervisor restart
 
-Then you can manage the process by running::
+Then you can manage the process by running:
 
     sudo supervisorctl
 
