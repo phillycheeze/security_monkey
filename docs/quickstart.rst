@@ -13,7 +13,9 @@ IAM Permissions
 ***************
 
 - For AWS, please see `AWS IAM instructions <./iam_aws.rst>`.
-- For GCP, please see :ref:`GCP IAM instructions <IAMGCP>`.
+- For GCP, please see `GCP IAM instructions`.
+
+.. _GCP IAM instructions: iam_gcp.rst
 
 ********
 Database
