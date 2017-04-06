@@ -12,8 +12,7 @@ Security Monkey can run on an Amazon EC2 (AWS) instance or a Google Cloud Platfo
 IAM Permissions
 ***************
 
-- For AWS, please see `AWS IAM instructions <./iam_aws.rst>`.
-- For GCP, please see `GCP IAM instructions`.
+- For GCP, please see `GCP IAM instructions`_.
 
 .. _GCP IAM instructions: iam_gcp.rst
 
