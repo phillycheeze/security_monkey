@@ -9,6 +9,7 @@ Security Monkey can run on an Amazon EC2 (AWS) instance or a Google Cloud Platfo
 IAM Permissions
 ---------------
 
+-   For AWS, please see [AWS IAM instructions].
 -   For GCP, please see [GCP IAM instructions].
 
 Database
@@ -94,3 +95,4 @@ Fix ownership for python modules:
 If you’re using the stable (master) branch, you have the option of downloading the web UI instead of compil
 
   [GCP IAM instructions]: iam_gcp.md
+  [AWS IAM instructions]: iam_aws.md
